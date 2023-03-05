@@ -20,5 +20,3 @@ def group_posts(request, slug):
         'title': group.title
     }
     return render(request, 'posts/group_list.html', context)
-
-
