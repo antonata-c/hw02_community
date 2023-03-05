@@ -1,32 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Group
 
-COUNT_POSTS: int = 10
-
 
 def index(request):
-    template = 'posts/index.html'
-    text = 'Это главная страница проекта Yatube'
-    title = 'Последние обновления на сайте'
-    posts = Post.objects.all()[:COUNT_POSTS]
-    # В словаре context отправляем информацию в шаблон
+    posts = Post.objects.order_by('-pub_date')[:10]
     context = {
-        'title': title,
-        'text': text,
         'posts': posts,
     }
-    return render(request, template, context)
+    return render(request, 'posts/index.html', context)
 
 
 def group_posts(request, slug):
-    template = 'posts/group_list.html'
-    text = 'Лев Толстой – зеркало русской революции.'
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts_set.all()[:COUNT_POSTS]
-    context = {
-        'text': text,
-        'groupч': group,
-        'posts': posts,
-    }
 
-    return render(request, template, context)
+    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    context = {
+        'group': group,
+        'posts': posts,
+        'title': group.title
+    }
+    return render(request, 'posts/group_list.html', context)
+
+
