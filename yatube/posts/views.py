@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Post, Group
+from django.conf import settings
+from django.shortcuts import get_object_or_404, render
+
+from .models import Group, Post
 
 
 def index(request):
-    posts = Post.objects.order_by('-pub_date')[:10]
+    posts = Post.objects.all()[:settings.POSTS_SHOW_AMOUNT]
     context = {
         'posts': posts,
     }
@@ -12,11 +14,9 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    posts = group.posts.all()[:settings.POSTS_SHOW_AMOUNT]
     context = {
         'group': group,
         'posts': posts,
-        'title': group.title
     }
     return render(request, 'posts/group_list.html', context)

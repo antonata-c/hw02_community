@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}
-  Записи сообщества {{ title }}
+  Записи сообщества {{ group.title }}
 {% endblock %}
 {% block content %}
+  Название группы: {{ group.title }}
+  <br>
+  Описание группы: {{ group.description }}
+  <br>
   {% for post in posts %}
+    <article>
     <ul>
         <li>
             Автор: {{ post.author.get_full_name }}
@@ -12,9 +17,10 @@
             Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
     </ul>
-    <p>{{ post.text }}</p>
+    {{ post.text|linebreaks }}
     {% if not forloop.last %}
       <hr>
     {% endif %}
+    </article>
   {% endfor %}
 {% endblock %}
