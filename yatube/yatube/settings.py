@@ -10,8 +10,6 @@ ALLOWED_HOSTS = []
 
 POSTS_SHOW_AMOUNT = 10
 
-
-
 INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'django.contrib.admin',
@@ -87,8 +85,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
 
 STATIC_URL = '/static/'
 
