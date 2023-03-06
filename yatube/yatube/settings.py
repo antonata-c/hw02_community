@@ -10,6 +10,8 @@ ALLOWED_HOSTS = []
 
 POSTS_SHOW_AMOUNT = 10
 
+POST_TEXT_LENGTH = 30
+
 INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'django.contrib.admin',
