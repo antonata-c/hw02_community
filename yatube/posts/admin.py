@@ -27,7 +27,6 @@ class GroupAdmin(admin.ModelAdmin):
     list_editable = ('description',)
     search_fields = ('title',)
     list_filter = ('title',)
-    empty_value_display = '-пусто-'
 
 
 admin.site.register(Group, GroupAdmin)

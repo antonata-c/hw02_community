@@ -3,24 +3,24 @@
   Записи сообщества {{ group.title }}
 {% endblock %}
 {% block content %}
-  Название группы: {{ group.title }}
+  <h1>Название группы: {{ group.title }}</h1>
   <br>
-  Описание группы: {{ group.description }}
+  <p>Описание группы: {{ group.description|linebreaks }}</p>
   <br>
   {% for post in posts %}
     <article>
-    <ul>
+      <ul>
         <li>
-            Автор: {{ post.author.get_full_name }}
+          Автор: {{ post.author.get_full_name }}
         </li>
         <li>
-            Дата публикации: {{ post.pub_date|date:"d E Y" }}
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
-    </ul>
-    {{ post.text|linebreaks }}
+      </ul>
+      {{ post.text|linebreaks }}
+    </article>
     {% if not forloop.last %}
       <hr>
     {% endif %}
-    </article>
   {% endfor %}
 {% endblock %}
